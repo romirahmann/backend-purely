@@ -9,8 +9,10 @@ const AnswerController = require("./../../controller/master_controller/AnswerCon
 // User API
 router.get("/users", UserController.getAllUser);
 router.post("/registrasi", UserController.registrasiUser);
+router.put("/users/:user_code", UserController.updateUserData);
 
 // Progres
+router.get("/result/:user_code", ResultController.getByUserCode);
 router.post("/add-progress", ResultController.addProgresUser);
 router.put("/update-progress/:user_code", ResultController.updateProgress);
 
