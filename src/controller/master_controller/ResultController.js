@@ -1,6 +1,11 @@
 const model = require("../../model/result.model");
 const api = require("../../tools/common");
 
+getAllResult = async (req, res) => {
+  let data = await model.getAllResult();
+  return api.ok(res, data);
+};
+
 getByUserCode = async (req, res) => {
   const user_code = req.params.user_code;
   if (user_code) {
@@ -37,4 +42,5 @@ module.exports = {
   addProgresUser,
   updateProgress,
   getByUserCode,
+  getAllResult,
 };

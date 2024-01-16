@@ -12,6 +12,7 @@ router.post("/registrasi", UserController.registrasiUser);
 router.put("/users/:user_code", UserController.updateUserData);
 
 // Progres
+router.get("/getAllResult", ResultController.getAllResult);
 router.get("/result/:user_code", ResultController.getByUserCode);
 router.post("/add-progress", ResultController.addProgresUser);
 router.put("/update-progress/:user_code", ResultController.updateProgress);
