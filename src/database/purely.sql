@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2024 at 02:41 AM
+-- Generation Time: Jan 18, 2024 at 07:15 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -51,16 +51,13 @@ INSERT INTO `answer` (`answer_id`, `question_id`, `description`, `status`) VALUE
 (20, 3, '2.422 mdpl', 1),
 (21, 3, '2.510 mdpl', 0),
 (22, 3, '2.600 mdpl', 0),
-(23, 3, '2.700 mdpl', 0),
 (24, 4, '50.270 ha', 1),
 (25, 4, '51.270 ha', 0),
-(26, 3, '52.270 ha', 0),
 (27, 4, '53.270 ha', 0),
 (28, 4, '54.270 ha', 0),
 (29, 5, 'Upacara Yadnya Kasada', 1),
 (30, 5, 'Upacara Nyepi', 0),
 (31, 5, 'Upacara Nyadran', 0),
-(32, 5, 'Upacara Maulid Nabi', 0),
 (33, 5, 'Upacara Idul Fitri', 0);
 
 -- --------------------------------------------------------
@@ -118,7 +115,6 @@ INSERT INTO `question` (`question_id`, `question`, `level_code`) VALUES
 CREATE TABLE `result` (
   `result_id` int(11) NOT NULL,
   `user_code` varchar(15) NOT NULL,
-  `question_id` int(11) NOT NULL,
   `score` int(11) NOT NULL DEFAULT 0,
   `created_at` date NOT NULL DEFAULT current_timestamp(),
   `update_at` date NOT NULL DEFAULT current_timestamp()
@@ -128,8 +124,10 @@ CREATE TABLE `result` (
 -- Dumping data for table `result`
 --
 
-INSERT INTO `result` (`result_id`, `user_code`, `question_id`, `score`, `created_at`, `update_at`) VALUES
-(1, 'user268', 1, 50, '2024-01-12', '2024-01-12');
+INSERT INTO `result` (`result_id`, `user_code`, `score`, `created_at`, `update_at`) VALUES
+(5, 'romirahman619', 350, '2024-01-14', '2024-01-14'),
+(6, 'admin352', 0, '2024-01-15', '2024-01-15'),
+(7, 'Safira580', 350, '2024-01-17', '2024-01-17');
 
 -- --------------------------------------------------------
 
@@ -173,12 +171,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `user_code`, `level_code`) VALUES
-(1, 'admin', '$2b$10$vOdRGuo/iKsm5KWEj/t3aOaKTjM89IzPnGr1H7.e7FlQMquv9kQtS', 'admin123', 1),
-(2, 'romirahman', '$2b$10$MRl0K2lKy4nIRvP5VRvKB.l7rYwNSPdQH2MtQACapa9w0q5t85.3G', 'romirahman0378', 1),
-(3, 'user', '$2b$10$RgF7qzlyOXNGowEhS5Jc3eFY7O7Ki0N2OwDbeDf1wxO6h.u676Rx2', 'user268', 1),
-(4, 'upi', '$2b$10$O6LiEVxNJb1fYZTfga7qyuRtq/Kg5nQ5R.WotEMcid1mwlbDiuki2', '', 1),
-(6, 'abdul', '$2b$10$o8sn1I0k.jjge.hKfChQM.xLwSeHGjyMSWCvcCNpnj.aE9Dtvisem', 'abdul494', 1),
-(7, 'alwahdi', '$2b$10$S1Vq36IATCktt0wqqNBNPOOVpz2QRyQosiVGDkRwRXZga.VHpMg3S', 'alwahdi443', 1);
+(8, 'romirahman', '$2b$10$SDwZlvz3cDIjY1a5jDVbCeizSpPXv4g7ySK1RyrlPUpGG5zpwXsAa', 'romirahman619', 3),
+(9, 'admin', '$2b$10$HNoc52y9vqqwjuy7WaqD/.BsBE0Zee35bley9nT8QFYmeoSyC60G6', 'admin352', 1),
+(10, 'Safira', '$2b$10$nQ00ROQZjtHERagLQxtb8eWXniANbgJr3Tsz6MU/YcxSLvOrMgTKC', 'Safira580', 3);
 
 --
 -- Indexes for dumped tables
@@ -210,8 +205,7 @@ ALTER TABLE `question`
 --
 ALTER TABLE `result`
   ADD PRIMARY KEY (`result_id`),
-  ADD KEY `scoreToUser` (`user_code`),
-  ADD KEY `question_id` (`question_id`);
+  ADD KEY `scoreToUser` (`user_code`);
 
 --
 -- Indexes for table `score`
@@ -254,7 +248,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `score`
@@ -266,7 +260,7 @@ ALTER TABLE `score`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -288,7 +282,6 @@ ALTER TABLE `question`
 -- Constraints for table `result`
 --
 ALTER TABLE `result`
-  ADD CONSTRAINT `result_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
   ADD CONSTRAINT `scoreToUser` FOREIGN KEY (`user_code`) REFERENCES `user` (`user_code`);
 
 --
